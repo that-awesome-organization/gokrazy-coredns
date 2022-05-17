@@ -10,7 +10,7 @@ import (
 func main() {
 	coredns := exec.Command(
 		"/usr/local/bin/coredns",
-		os.Args...,
+		os.Args[1:]...,
 	)
 
 	coredns.Env = append(coredns.Env, os.Environ()...)
@@ -19,6 +19,7 @@ func main() {
 	coredns.Stderr = os.Stderr
 	err := coredns.Run()
 	if err != nil {
+		fmt.Fprintln(os.Stderr, err.Error())
 		if exiterr, ok := err.(*exec.ExitError); ok {
 			if status, ok := exiterr.Sys().(syscall.WaitStatus); ok {
 				os.Exit(status.ExitStatus())
