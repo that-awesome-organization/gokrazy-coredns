@@ -1,0 +1,4 @@
+[submodule "external/coredns"]
+	path = external/coredns
+	url = https://github.com/coredns/coredns.git
+        branch = tags/v1.9.2
